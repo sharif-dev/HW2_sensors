@@ -3,4 +3,6 @@
     <string name="degree">Degree</string>
     <string name="off">OFF</string>
     <string name="on">ON</string>
+    <string name="false_degree">False Degree</string>
+    <string name="ACCELEROMETER_NOT_FOUND">ACCELEROMETER NOT FOUND</string>
 </resources>
