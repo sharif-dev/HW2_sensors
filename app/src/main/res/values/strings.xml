@@ -5,4 +5,5 @@
     <string name="on">ON</string>
     <string name="false_degree">False Degree</string>
     <string name="ACCELEROMETER_NOT_FOUND">ACCELEROMETER NOT FOUND</string>
+    <string name="fail">FAILED</string>
 </resources>

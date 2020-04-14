@@ -30,6 +30,8 @@ public class CustomHandler extends Handler {
             case R.string.false_degree:
                 makeToast(R.string.false_degree);
                 return;
+            case R.string.fail:
+                makeToast(R.string.fail);
 
         }
 

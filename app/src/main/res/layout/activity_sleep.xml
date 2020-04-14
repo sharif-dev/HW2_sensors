@@ -34,6 +34,7 @@
         android:alpha="0.0"
         android:ems="10"
         android:hint="@string/degree"
+        android:imeOptions="actionDone"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
