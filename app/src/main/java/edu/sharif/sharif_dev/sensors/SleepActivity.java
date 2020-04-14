@@ -7,6 +7,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -29,6 +30,7 @@ public class SleepActivity extends AppCompatActivity implements SensorEventListe
     private int customDegree = 10;
     private CustomHandler customHandler;
     private final int RESULT_ENABLE = 1;
+    private static final String PREFERENCE_FILE = "sleep_preference";
 
 
     @Override
@@ -42,6 +44,8 @@ public class SleepActivity extends AppCompatActivity implements SensorEventListe
 
         final Switch turn_switch = findViewById(R.id.switch_sleep);
         turn_switch.setText(R.string.off);
+        setLastDataSwitch(turn_switch);
+
         turn_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -49,11 +53,29 @@ public class SleepActivity extends AppCompatActivity implements SensorEventListe
                     onSwitch(turn_switch);
                 else
                     offSwitch(turn_switch);
+                setNewDataSwitch(isChecked);
             }
         });
 
         setCustomDegree();
 
+    }
+
+    private void setNewDataSwitch(boolean isChecked){
+        SharedPreferences settings = getSharedPreferences(PREFERENCE_FILE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("SWITCH_KEY", isChecked);
+        editor.apply();
+    }
+
+    private void setLastDataSwitch(Switch turn_switch){
+        SharedPreferences settings = getSharedPreferences(PREFERENCE_FILE, Context.MODE_PRIVATE);
+        boolean silent = settings.getBoolean("SWITCH_KEY", false);
+        turn_switch.setChecked(silent);
+        if(silent){
+            turn_switch.setText(R.string.on);
+            setEditTextAnim(R.animator.fade_in);
+        }
     }
 
     private void setSensorManager() {
