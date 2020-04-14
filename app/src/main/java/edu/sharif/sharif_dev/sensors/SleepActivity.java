@@ -33,6 +33,7 @@ public class SleepActivity extends AppCompatActivity implements SensorEventListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("tag", "create");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sleep);
         customHandler = new CustomHandler(getApplicationContext());
@@ -67,7 +68,12 @@ public class SleepActivity extends AppCompatActivity implements SensorEventListe
         if (sensor == null)
             showError(R.string.ACCELEROMETER_NOT_FOUND);
         else
-            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+            registerListener();
+    }
+
+    private void registerListener(){
+        sensorManager.unregisterListener(this);
+        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     private void setCustomDegree() {
@@ -96,6 +102,7 @@ public class SleepActivity extends AppCompatActivity implements SensorEventListe
     private void offSwitch(Switch turn_switch) {
         turn_switch.setText(R.string.off);
         setEditTextAnim(R.animator.fade_out);
+        sensorManager.unregisterListener(this);
         sensor = null;
     }
 
@@ -148,18 +155,6 @@ public class SleepActivity extends AppCompatActivity implements SensorEventListe
         //TODO
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (sensor != null)
-            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        sensorManager.unregisterListener(this);
-    }
 
     private void showError(int string) {
         customHandler.sendIntMessage(string);
