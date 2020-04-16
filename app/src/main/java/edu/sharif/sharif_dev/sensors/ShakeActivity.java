@@ -27,8 +27,11 @@ public class ShakeActivity extends AppCompatActivity {
         super.onCreate(bundle);
         handler = new CustomHandler(this);
         setContentView(R.layout.activity_shake);
-        setSwitch();
+        boolean serviceStatus = isServiceRunning();
+        setSwitch(serviceStatus);
         seekBar = findViewById(R.id.seekBar);
+        if (serviceStatus)
+            seekBar.setVisibility(View.GONE);
         setSeekBar();
     }
 
@@ -66,9 +69,9 @@ public class ShakeActivity extends AppCompatActivity {
         startService(intent);
     }
 
-    private void setSwitch() {
+    private void setSwitch(boolean serviceStatus) {
         Switch swtch = findViewById(R.id.shake_enable);
-        swtch.setChecked(isServiceRunning());
+        swtch.setChecked(serviceStatus);
         swtch.setTextOff("disabled");
         swtch.setTextOn("enabled");
         swtch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

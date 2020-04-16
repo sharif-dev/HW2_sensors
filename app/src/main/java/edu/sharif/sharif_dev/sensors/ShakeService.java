@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -22,7 +23,7 @@ public class ShakeService extends Service {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(final Intent intent, int flags, int startId) {
         int seekBarValue = intent.getIntExtra("seekValue", 2);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -32,9 +33,14 @@ public class ShakeService extends Service {
             public void onShake(int count) {
                 // TODO: 4/16/20
                 Log.d("shook", "shake!!!!!!!!!!!!!!!!!!");
+                PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+                PowerManager.WakeLock wl = pm.newWakeLock((PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.FULL_WAKE_LOCK
+                                | PowerManager.ACQUIRE_CAUSES_WAKEUP),
+                        "My:ag");
+                wl.acquire(1000);
             }
         });
-        shakeDetector.setShakeTreshold(seekBarValue);
+        shakeDetector.setShakeThreshold(seekBarValue);
         sensorManager.registerListener(shakeDetector, accelerometer, SensorManager.SENSOR_DELAY_UI);
         return super.onStartCommand(intent, flags, startId);
     }
@@ -47,5 +53,9 @@ public class ShakeService extends Service {
 
     @Override
     public void onCreate() {
+    }
+
+    private void turnOnDisplay() {
+
     }
 }
