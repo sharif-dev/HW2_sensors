@@ -18,11 +18,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setShakeActivity(){
-
+    private void setShakeActivity() {
+        ImageView shakeIcon = findViewById(R.id.shake_icon);
+        shakeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ShakeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
-    private void setSleepActivity(){
+    private void setSleepActivity() {
         ImageView sleep_mode_icon = findViewById(R.id.sleep_mode_icon);
         sleep_mode_icon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,10 +41,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setAlarmActivity(){
+    private void setAlarmActivity() {
 
     }
-
 
 
 }
