@@ -30,6 +30,7 @@
                 <action android:name= "android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
         </receiver>
+        <service android:name=".ShakeService" />
     </application>
     <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
 
