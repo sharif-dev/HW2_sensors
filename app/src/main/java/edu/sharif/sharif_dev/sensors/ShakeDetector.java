@@ -7,7 +7,7 @@ import android.hardware.SensorManager;
 
 public class ShakeDetector implements SensorEventListener {
 
-
+    private static final float[] SENSITIVITIES = new float[]{1F, 2F, 2.7F, 3F, 3.5F, 4F};
     private static final int SHAKE_SLOP_TIME_MS = 500;
     private static final int SHAKE_COUNT_RESET_TIME_MS = 3000;
 
@@ -16,8 +16,8 @@ public class ShakeDetector implements SensorEventListener {
     private int mShakeCount;
     private float shakeThreshold = 2.7F;
 
-    public void setShakeTreshold(float shakeThreshold) {
-        this.shakeThreshold = shakeThreshold;
+    public void setShakeTreshold(int index) {
+        this.shakeThreshold = SENSITIVITIES[index];
     }
 
     public void setOnShakeListener(OnShakeListener listener) {

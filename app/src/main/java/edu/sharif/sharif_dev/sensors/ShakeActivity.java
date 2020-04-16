@@ -5,7 +5,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.SeekBar;
 import android.widget.Switch;
 
 
@@ -15,6 +17,8 @@ public class ShakeActivity extends AppCompatActivity {
     private Sensor accelerometer;
     private ShakeDetector shakeDetector;
     private CustomHandler handler;
+    private SeekBar seekBar;
+    private int seekBarValue = 2;
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -23,14 +27,37 @@ public class ShakeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shake);
         setSensor();
         setSwitch();
+        seekBar = findViewById(R.id.seekBar);
+        setSeekBar();
     }
+
+    private void setSeekBar() {
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                seekBarValue = i;
+                System.out.println(i);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+    }
+
 
     private void setSensor() {
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         if (accelerometer == null) {
-            handler.sendIntMessage(R.string.ACCELEROMETER_NOT_FOUND);
             // no sensor
+            handler.sendIntMessage(R.string.ACCELEROMETER_NOT_FOUND);
             return;
         }
         shakeDetector = new ShakeDetector();
@@ -41,12 +68,12 @@ public class ShakeActivity extends AppCompatActivity {
                 System.out.println("shake!!!!!!!!!!!!!!!!!!");
             }
         });
-        sensorManager.unregisterListener(shakeDetector);
     }
 
 
     private void startService() {
         // TODO: 4/16/20
+        shakeDetector.setShakeTreshold(seekBarValue);
         sensorManager.registerListener(shakeDetector, accelerometer, SensorManager.SENSOR_DELAY_UI);
     }
 
@@ -61,9 +88,11 @@ public class ShakeActivity extends AppCompatActivity {
                 if (b) {
                     // checked
                     startService();
+                    seekBar.setVisibility(View.GONE);
                 } else {
                     // unchecked
                     sensorManager.unregisterListener(shakeDetector);
+                    seekBar.setVisibility(View.VISIBLE);
                 }
             }
         });
