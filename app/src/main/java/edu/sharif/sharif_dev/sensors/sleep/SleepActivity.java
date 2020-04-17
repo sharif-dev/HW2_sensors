@@ -120,8 +120,14 @@ public class SleepActivity extends AppCompatActivity {
     }
 
     private void startSleepService(){
-        Intent intent = new Intent(getApplicationContext(),SleepService.class);
-        startService(intent);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(getApplicationContext(), SleepService.class);
+                startService(intent);
+            }
+        }).start();
+
     }
     private void stopSleepService(){
         stopService(new Intent(getApplicationContext(),SleepService.class));

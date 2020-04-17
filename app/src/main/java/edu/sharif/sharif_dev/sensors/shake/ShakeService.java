@@ -1,4 +1,4 @@
-package edu.sharif.sharif_dev.sensors;
+package edu.sharif.sharif_dev.sensors.shake;
 
 import android.app.Service;
 import android.content.Context;

@@ -1,6 +1,7 @@
 package edu.sharif.sharif_dev.sensors;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import edu.sharif.sharif_dev.sensors.alarm.AlarmActivity;
 import edu.sharif.sharif_dev.sensors.shake.ShakeActivity;
 import edu.sharif.sharif_dev.sensors.sleep.Admin;
 import edu.sharif.sharif_dev.sensors.sleep.SleepActivity;
@@ -73,6 +75,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setAlarmActivity() {
+        ImageView alarm_icon = findViewById(R.id.alarm_icon);
+        alarm_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AlarmActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
