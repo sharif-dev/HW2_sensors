@@ -1,4 +1,4 @@
-package edu.sharif.sharif_dev.sensors;
+package edu.sharif.sharif_dev.sensors.sleep;
 
 import android.app.admin.DeviceAdminReceiver;
 import android.content.Context;

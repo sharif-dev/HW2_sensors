@@ -1,18 +1,19 @@
-package edu.sharif.sharif_dev.sensors;
+package edu.sharif.sharif_dev.sensors.shake;
 
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
+
+import edu.sharif.sharif_dev.sensors.CustomHandler;
+import edu.sharif.sharif_dev.sensors.R;
 
 
 public class ShakeActivity extends AppCompatActivity {

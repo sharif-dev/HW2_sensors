@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import edu.sharif.sharif_dev.sensors.shake.ShakeActivity;
+import edu.sharif.sharif_dev.sensors.sleep.Admin;
 import edu.sharif.sharif_dev.sensors.sleep.SleepActivity;
 import edu.sharif.sharif_dev.sensors.sleep.SleepDetector;
 
