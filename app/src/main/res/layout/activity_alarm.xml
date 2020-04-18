@@ -17,4 +17,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/alarm_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="41dp"
+        android:text="Set alaram"
+        app:layout_constraintEnd_toEndOf="@+id/time_edit_text"
+        app:layout_constraintTop_toBottomOf="@+id/time_edit_text" />
+
+    <Button
+        android:id="@+id/cancel_alarm_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="59dp"
+        android:layout_marginEnd="124dp"
+        android:text="cancel alaram"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_btn" />
+
 </android.support.constraint.ConstraintLayout>
