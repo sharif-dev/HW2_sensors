@@ -6,4 +6,7 @@
     <string name="false_degree">False Degree</string>
     <string name="ACCELEROMETER_NOT_FOUND">ACCELEROMETER NOT FOUND</string>
     <string name="fail">FAILED</string>
+    <string name="time_not_correct">Entered Time is not Correct</string>
+    <string name="alarm_set">Alarm set</string>
+    <string name="alarm_canceled">Alarm canceled</string>
 </resources>

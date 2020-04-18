@@ -15,16 +15,19 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 import java.util.Objects;
 
+import edu.sharif.sharif_dev.sensors.CustomHandler;
 import edu.sharif.sharif_dev.sensors.R;
 
 public class AlarmActivity extends AppCompatActivity {
-    private Intent malarmIntent;
-    PendingIntent alarmIntentPending;
+    private Intent mAlarmIntent;
+    private PendingIntent alarmIntentPending;
+    private CustomHandler customHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
+        customHandler = new CustomHandler(getApplicationContext());
 
         setTimeEditText();
 
@@ -84,25 +87,24 @@ public class AlarmActivity extends AppCompatActivity {
             calendar.set(Calendar.MINUTE, Integer.parseInt(time_slices[1]));
 
             // set intents
-            malarmIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
-            alarmIntentPending = PendingIntent.getBroadcast(getApplicationContext(), 0, malarmIntent, 0);
+            mAlarmIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
+            alarmIntentPending = PendingIntent.getBroadcast(getApplicationContext(), 0, mAlarmIntent, 0);
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                     AlarmManager.INTERVAL_DAY, alarmIntentPending);
-
+            showMessage(R.string.alarm_set);
         } else {
-            // TODO error
+            showMessage(R.string.time_not_correct);
         }
     }
 
     private void offAlarm() {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//        PendingIntent pendingIntent =
-//                PendingIntent.getService(getApplicationContext(), 0, malarmIntent, PendingIntent.FLAG_NO_CREATE);
-//        if (pendingIntent != null && alarmManager != null) {
-//            alarmManager.cancel(pendingIntent);
-//        }
         if(alarmIntentPending != null){
             alarmManager.cancel(alarmIntentPending);
+            showMessage(R.string.alarm_canceled);
         }
+    }
+    private void showMessage(int string){
+        customHandler.sendIntMessage(string);
     }
 }

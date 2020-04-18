@@ -32,6 +32,12 @@ public class CustomHandler extends Handler {
                 return;
             case R.string.fail:
                 makeToast(R.string.fail);
+                return;
+            case R.string.time_not_correct:
+                makeToast(R.string.time_not_correct);
+                return;
+            case R.string.alarm_set:
+                makeToast(R.string.alarm_set);
 
         }
 
