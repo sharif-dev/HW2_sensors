@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -19,9 +20,10 @@ import edu.sharif.sharif_dev.sensors.CustomHandler;
 import edu.sharif.sharif_dev.sensors.R;
 
 public class AlarmActivity extends AppCompatActivity {
-    private Intent mAlarmIntent;
+    //private Intent mAlarmIntent;
     private PendingIntent alarmIntentPending;
     private CustomHandler customHandler;
+    private int sensitivity = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,28 @@ public class AlarmActivity extends AppCompatActivity {
             }
         });
 
+        setSeekBar();
+
+    }
+
+    private void setSeekBar() {
+        SeekBar seekBar = findViewById(R.id.seekBar2);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                sensitivity = i;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     private void setTimeEditText() {
@@ -73,6 +97,8 @@ public class AlarmActivity extends AppCompatActivity {
     }
 
     private void setAlarm() {
+        offAlarm();
+
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         EditText time_edit = findViewById(R.id.time_edit_text);
@@ -87,8 +113,10 @@ public class AlarmActivity extends AppCompatActivity {
             calendar.set(Calendar.MINUTE, Integer.parseInt(time_slices[1]));
 
             // set intents
-            mAlarmIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
-            alarmIntentPending = PendingIntent.getBroadcast(getApplicationContext(), 0, mAlarmIntent, 0);
+            Intent mAlarmIntent = new Intent(getApplicationContext(), AlarmReceiver.class);
+            mAlarmIntent.putExtra("sensitivity", sensitivity);
+            alarmIntentPending = PendingIntent.getBroadcast(getApplicationContext(), 0,
+                    mAlarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
                     AlarmManager.INTERVAL_DAY, alarmIntentPending);
             showMessage(R.string.alarm_set);
@@ -99,12 +127,13 @@ public class AlarmActivity extends AppCompatActivity {
 
     private void offAlarm() {
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        if(alarmIntentPending != null){
+        if (alarmIntentPending != null) {
             alarmManager.cancel(alarmIntentPending);
             showMessage(R.string.alarm_canceled);
         }
     }
-    private void showMessage(int string){
+
+    private void showMessage(int string) {
         customHandler.sendIntMessage(string);
     }
 }

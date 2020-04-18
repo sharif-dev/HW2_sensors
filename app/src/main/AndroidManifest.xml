@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".alarm.WakeupActivity"></activity>
+        <activity android:name=".alarm.WakeupActivity"
+            android:screenOrientation="portrait"
+            />
         <activity android:name=".alarm.AlarmActivity" />
         <activity android:name=".sleep.SleepActivity" />
         <activity android:name=".shake.ShakeActivity" />

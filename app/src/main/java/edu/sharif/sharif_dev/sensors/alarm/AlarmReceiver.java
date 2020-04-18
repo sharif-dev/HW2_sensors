@@ -9,6 +9,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Intent wake_up_intent = new Intent(context, WakeupActivity.class);
         wake_up_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        wake_up_intent.putExtra("sensitivity", intent.getIntExtra("sensitivity", 5));
         context.startActivity(wake_up_intent);
     }
 }
