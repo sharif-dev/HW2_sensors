@@ -7,7 +7,7 @@ import android.content.Intent;
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent wake_up_intent =new Intent(context,WakeupActivity.class) ;
+        Intent wake_up_intent = new Intent(context, WakeupActivity.class);
         wake_up_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(wake_up_intent);
     }

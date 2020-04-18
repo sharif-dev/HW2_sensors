@@ -38,6 +38,10 @@ public class CustomHandler extends Handler {
                 return;
             case R.string.alarm_set:
                 makeToast(R.string.alarm_set);
+                return;
+            case R.string.alarm_canceled:
+                makeToast(R.string.alarm_canceled);
+                return;
 
         }
 
