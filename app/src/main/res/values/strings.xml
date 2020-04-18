@@ -9,4 +9,7 @@
     <string name="time_not_correct">Entered Time is not Correct</string>
     <string name="alarm_set">Alarm set</string>
     <string name="alarm_canceled">Alarm canceled</string>
+    <string name="sensitivity">Sensitivity</string>
+    <string name="enabled">enabled</string>
+    <string name="disabled">disabled</string>
 </resources>

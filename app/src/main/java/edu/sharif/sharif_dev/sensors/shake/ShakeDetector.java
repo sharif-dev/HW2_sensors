@@ -7,7 +7,7 @@ import android.hardware.SensorManager;
 
 public class ShakeDetector implements SensorEventListener {
 
-    private static final float[] SENSITIVITIES = new float[]{1.5F, 2F, 3F, 4F, 5F, 6F};
+    private static final float[] SENSITIVITIES = new float[]{6F, 5F, 4F, 3F, 2F, 1.5F};
     private static final int SHAKE_SLOP_TIME_MS = 500;
     private static final int SHAKE_COUNT_RESET_TIME_MS = 3000;
 

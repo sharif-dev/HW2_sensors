@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import edu.sharif.sharif_dev.sensors.CustomHandler;
 import edu.sharif.sharif_dev.sensors.R;
@@ -21,7 +22,7 @@ public class ShakeActivity extends AppCompatActivity {
 
     private CustomHandler handler;
     private SeekBar seekBar;
-    private int seekBarValue = 2;
+    private int seekBarValue = 3;
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -30,10 +31,16 @@ public class ShakeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shake);
         boolean serviceStatus = isServiceRunning();
         setSwitch(serviceStatus);
+        setStates(serviceStatus);
         seekBar = findViewById(R.id.seekBar);
         if (serviceStatus)
             seekBar.setVisibility(View.GONE);
         setSeekBar();
+    }
+
+    private void setStates(boolean status) {
+        TextView statusText = findViewById(R.id.service_states);
+        statusText.setText(status ? getString(R.string.enabled) : getString(R.string.disabled));
     }
 
     private void setSeekBar() {
@@ -41,7 +48,6 @@ public class ShakeActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 seekBarValue = i;
-                System.out.println(i);
             }
 
             @Override
@@ -73,18 +79,18 @@ public class ShakeActivity extends AppCompatActivity {
     private void setSwitch(boolean serviceStatus) {
         Switch swtch = findViewById(R.id.shake_enable);
         swtch.setChecked(serviceStatus);
-        swtch.setTextOff("disabled");
-        swtch.setTextOn("enabled");
         swtch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     // checked
                     startService();
+                    setStates(true);
                     seekBar.setVisibility(View.GONE);
                 } else {
                     // unchecked
                     stopService(new Intent(getApplicationContext(), ShakeService.class));
+                    setStates(false);
                     seekBar.setVisibility(View.VISIBLE);
                 }
             }

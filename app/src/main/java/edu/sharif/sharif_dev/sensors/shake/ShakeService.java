@@ -24,19 +24,18 @@ public class ShakeService extends Service {
 
     @Override
     public int onStartCommand(final Intent intent, int flags, int startId) {
-        int seekBarValue = intent.getIntExtra("seekValue", 2);
+        int seekBarValue = intent.getIntExtra("seekValue", 3);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         shakeDetector = new ShakeDetector();
         shakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
             @Override
             public void onShake(int count) {
-                // TODO: 4/16/20
-                Log.d("shook", "shake!!!!!!!!!!!!!!!!!!");
+                //Log.d("shook", "shake!!!!!!!!!!!!!!!!!!");
                 PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
                 PowerManager.WakeLock wl = pm.newWakeLock((PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.FULL_WAKE_LOCK
                                 | PowerManager.ACQUIRE_CAUSES_WAKEUP),
-                        "My:ag");
+                        "sensors:ShakeService");
                 wl.acquire(1000);
             }
         });
@@ -53,9 +52,5 @@ public class ShakeService extends Service {
 
     @Override
     public void onCreate() {
-    }
-
-    private void turnOnDisplay() {
-
     }
 }
