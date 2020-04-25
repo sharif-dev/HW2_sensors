@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:foregroundGravity="center"
+    android:background="@color/light_blue"
     tools:context=".alarm.AlarmActivity">
 
     <EditText
@@ -15,6 +16,7 @@
         android:layout_marginTop="151dp"
         android:ems="10"
         android:foregroundGravity="center"
+        android:background="@drawable/edit_text_background"
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,12 +24,13 @@
 
     <Button
         android:id="@+id/alarm_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="8dp"
         android:text="Set alaram"
+        android:background="@drawable/button_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,11 +38,12 @@
 
     <Button
         android:id="@+id/cancel_alarm_btn"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="68dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/button_background"
         android:gravity="center"
         android:text="cancel alaram"
         app:layout_constraintEnd_toEndOf="parent"

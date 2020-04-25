@@ -97,7 +97,7 @@ public class AlarmActivity extends AppCompatActivity {
     }
 
     private void setAlarm() {
-        offAlarm();
+        //offAlarm();
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 

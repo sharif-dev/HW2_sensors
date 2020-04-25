@@ -6,4 +6,8 @@
     <color name="light_blue">#9FEEF3</color>
     <color name="black">#000</color>
     <color name="white_transparent">#3BE1E1E1</color>
+    <color name="colorAccent_transparent">#F8D31353</color>
+    <color name="fuchsia">#F90067</color>
+    <color name="navy_blue">#003B73</color>
+
 </resources>
