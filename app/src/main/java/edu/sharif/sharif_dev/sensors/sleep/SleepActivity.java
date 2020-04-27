@@ -24,13 +24,14 @@ public class SleepActivity extends AppCompatActivity {
     private SensorManager sensorManager;
     private Sensor sensor;
     private CustomHandler customHandler;
-   // private final int RESULT_ENABLE = 1;
+    // private final int RESULT_ENABLE = 1;
     private static final String PREFERENCE_FILE = "sleep_preference";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle(R.string.sleep);
         setContentView(R.layout.activity_sleep);
         customHandler = new CustomHandler(getApplicationContext());
 
@@ -55,18 +56,18 @@ public class SleepActivity extends AppCompatActivity {
 
     }
 
-    private void setNewDataSwitch(boolean isChecked){
+    private void setNewDataSwitch(boolean isChecked) {
         SharedPreferences settings = getSharedPreferences(PREFERENCE_FILE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.putBoolean("SWITCH_KEY", isChecked);
         editor.apply();
     }
 
-    private void setLastDataSwitch(Switch turn_switch){
+    private void setLastDataSwitch(Switch turn_switch) {
         SharedPreferences settings = getSharedPreferences(PREFERENCE_FILE, Context.MODE_PRIVATE);
         boolean switch_key = settings.getBoolean("SWITCH_KEY", false);
         turn_switch.setChecked(switch_key);
-        if(switch_key){
+        if (switch_key) {
             turn_switch.setText(R.string.on);
             setEditTextAnim(R.animator.fade_in);
         }
@@ -94,7 +95,7 @@ public class SleepActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
-                if(actionId == EditorInfo.IME_ACTION_DONE){
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
                     Editable text = degree_inp.getText();
                     if (text != null && !text.toString().equals("")) {
                         try {
@@ -119,7 +120,7 @@ public class SleepActivity extends AppCompatActivity {
         sensor = null;
     }
 
-    private void startSleepService(){
+    private void startSleepService() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -129,8 +130,9 @@ public class SleepActivity extends AppCompatActivity {
         }).start();
 
     }
-    private void stopSleepService(){
-        stopService(new Intent(getApplicationContext(),SleepService.class));
+
+    private void stopSleepService() {
+        stopService(new Intent(getApplicationContext(), SleepService.class));
     }
 
     private void setEditTextAnim(int animRes) {

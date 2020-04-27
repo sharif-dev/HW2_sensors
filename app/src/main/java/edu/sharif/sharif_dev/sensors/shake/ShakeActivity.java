@@ -27,6 +27,7 @@ public class ShakeActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+        setTitle(R.string.shake);
         handler = new CustomHandler(this);
         setContentView(R.layout.activity_shake);
         boolean serviceStatus = isServiceRunning();

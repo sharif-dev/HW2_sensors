@@ -12,4 +12,8 @@
     <string name="sensitivity">Sensitivity</string>
     <string name="enabled">enabled</string>
     <string name="disabled">disabled</string>
+    <string name="sensitive">Turn Off Sensitivity</string>
+    <string name="shake">Shake Service #2</string>
+    <string name="alarm">Alarm Service #1</string>
+    <string name="sleep">Sleep Service #3</string>
 </resources>

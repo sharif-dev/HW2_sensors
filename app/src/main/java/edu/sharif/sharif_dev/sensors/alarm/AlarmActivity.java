@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -20,7 +21,6 @@ import edu.sharif.sharif_dev.sensors.CustomHandler;
 import edu.sharif.sharif_dev.sensors.R;
 
 public class AlarmActivity extends AppCompatActivity {
-    //private Intent mAlarmIntent;
     private PendingIntent alarmIntentPending;
     private CustomHandler customHandler;
     private int sensitivity = 3;
@@ -28,6 +28,7 @@ public class AlarmActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle(R.string.alarm);
         setContentView(R.layout.activity_alarm);
         customHandler = new CustomHandler(getApplicationContext());
 
@@ -50,8 +51,14 @@ public class AlarmActivity extends AppCompatActivity {
         });
 
         setSeekBar();
-
+        initializeTime();
     }
+
+    private void initializeTime(){
+        EditText time = findViewById(R.id.time_edit_text);
+        time.setText("11:11");
+    }
+
 
     private void setSeekBar() {
         SeekBar seekBar = findViewById(R.id.seekBar2);
